@@ -9,22 +9,32 @@ import java.util.ArrayList;
 public class DataBase {
     public static String category = "";
     public static String names[] = {"짱구", "인앤아웃", "한빛스테이션", "넷큐브피시클럽", "몽블랑",
-            "인터코리아", "킹왕짱", "짱구"};
+            "인터코리아", "킹왕짱", "짱구", "짱구", "인앤아웃",
+            "한빛스테이션", "넷큐브피시클럽", "몽블랑", "인터코리아",
+            "킹왕짱", "짱구"};
 
     public static String[] startTimes = {"09", "09", "09", "09", "09",
+            "09", "09", "09", "09", "09", "09", "09", "09",
             "09", "09", "09"};
 
     public static String[] endTimes = {"24", "24", "24", "24", "24",
+            "24", "24", "24", "24", "24", "24", "24", "24",
             "24", "24", "24"};
 
     public static String[] latitudes = {"35.844100", "35.844100", "35.844100", "35.844100", "35.844100",
-            "35.844100", "35.844100", "35.844100"};
+            "35.844100", "35.844100", "35.844100", "35.844100", "35.844100",
+            "35.844100", "35.844100", "35.844100", "35.844100", "35.844100",
+            "35.844100"};
 
     public static String[] longitudes = {"127.126694", "127.126694", "127.126694", "127.126694", "127.126694",
-            "127.126694", "127.126694", "127.126994"};
+            "127.126694", "127.126694", "127.126994", "127.126694", "127.126694",
+            "127.126694", "127.126694", "127.126694", "127.126694", "127.126694",
+            "127.126994"};
 
     public static String[] categorys = {"pcBang", "clawGame", "karaoke", "dringkingBar", "foodStore",
-            "billiards", "pcBang", "pcBang"};
+            "billiards", "pcBang", "pcBang", "pcBang", "clawGame",
+            "karaoke", "dringkingBar", "foodStore", "billiards", "pcBang",
+            "pcBang"};
 
     public static String pcBang = "pcBang";
     public static String clawGame = "clawGame";
@@ -37,7 +47,9 @@ public class DataBase {
 
     public static Integer[] images= {
             R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout,
-            R.drawable.inandout, R.drawable.inandout, R.drawable.inandout};
+            R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout,
+            R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout,
+            R.drawable.inandout};
 
     public static String animationDirection="";
 
