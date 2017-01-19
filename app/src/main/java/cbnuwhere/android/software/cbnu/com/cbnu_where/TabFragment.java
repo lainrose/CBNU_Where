@@ -10,6 +10,10 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+
+import com.labo.kaji.fragmentanimations.CubeAnimation;
+
 
 public class TabFragment extends Fragment {
 
@@ -17,22 +21,51 @@ public class TabFragment extends Fragment {
     public static ViewPager vpTabViewPager;
     public static int int_items = 3 ;
 
+    public static TabFragment newInstance(@DataBase.AnimationDirection int direction) {
+        TabFragment tabFragment = new TabFragment();
+        tabFragment.setArguments(new Bundle());
+        tabFragment.getArguments().putInt("direction", direction);
+        return tabFragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            View view =  inflater.inflate(R.layout.fragment_tab,null);
+        View view =  inflater.inflate(R.layout.fragment_tab,null);
 
-            tlTabs = (TabLayout) view.findViewById(R.id.tlTabs);
-            vpTabViewPager = (ViewPager) view.findViewById(R.id.vpTabViewPager);
+        tlTabs = (TabLayout) view.findViewById(R.id.tlTabs);
+        vpTabViewPager = (ViewPager) view.findViewById(R.id.vpTabViewPager);
+        if(DataBase.getSwitchParm()){
+            vpTabViewPager.setAdapter(new TabAdapter(getChildFragmentManager(), new FragmentRecyclerView(), new FragmentMap(), new FragmentLike()));
+        }
+        else{
             vpTabViewPager.setAdapter(new TabAdapter(getChildFragmentManager(), new FragmentHome(), new FragmentMap(), new FragmentLike()));
-            tlTabs.post(new Runnable() {
+        }
+        tlTabs.post(new Runnable() {
                 @Override
                 public void run() {
                     tlTabs.setupWithViewPager(vpTabViewPager);
                 }
             });
+        DataBase.setSwitchParm(false);
         return view;
+    }
+
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        switch (getArguments().getInt("direction")) {
+            case DataBase.UP:
+                return CubeAnimation.create(CubeAnimation.UP, enter, DataBase.DURATION);
+            case DataBase.DOWN:
+                return CubeAnimation.create(CubeAnimation.DOWN, enter, DataBase.DURATION);
+            case DataBase.LEFT:
+                return CubeAnimation.create(CubeAnimation.LEFT, enter, DataBase.DURATION);
+            case DataBase.RIGHT:
+                return CubeAnimation.create(CubeAnimation.RIGHT, enter, DataBase.DURATION);
+            default:
+                return null;
+        }
     }
 
     public static class TabAdapter extends FragmentPagerAdapter {
@@ -40,7 +73,6 @@ public class TabFragment extends Fragment {
         private Fragment one;
         private Fragment two;
         private Fragment three;
-
 
         public TabAdapter(FragmentManager fragmentManager, Fragment one, Fragment two, Fragment three) {
             super(fragmentManager);
@@ -77,4 +109,6 @@ public class TabFragment extends Fragment {
             return null;
         }
     }
+
+
 }

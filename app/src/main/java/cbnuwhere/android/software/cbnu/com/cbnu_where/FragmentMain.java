@@ -26,7 +26,7 @@ public class FragmentMain extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.flMainContainer, new TabFragment()).commit();
+        fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.NODIR)).commit();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

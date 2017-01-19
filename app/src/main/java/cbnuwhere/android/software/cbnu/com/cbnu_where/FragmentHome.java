@@ -1,16 +1,17 @@
 package cbnuwhere.android.software.cbnu.com.cbnu_where;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.labo.kaji.fragmentanimations.CubeAnimation;
 
@@ -51,91 +52,81 @@ public class FragmentHome extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.llPcBang) {
-            DataBase.category = "pcBang";
-            DataBase.animationDirection = "downIn";
-            Transaction(new FragmentRecyclerView(), "left");
+            DataBase.getInstance().setCategory("pcBang");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.NODIR);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llClawGame) {
-            DataBase.category = "clawGame";
-            DataBase.animationDirection = "downIn";
-            Transaction(new FragmentRecyclerView(), "top");
+            DataBase.getInstance().setCategory("clawGame");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.UP);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llKaraoke) {
-            DataBase.category = "karaoke";
-            DataBase.animationDirection = "leftIn";
-            Transaction(new FragmentRecyclerView(), "top");
+            DataBase.getInstance().setCategory("karaoke");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.NODIR);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llDringkingBar) {
-            DataBase.category = "dringkingBar";
-            DataBase.animationDirection = "rightIn";
-            Transaction(new FragmentRecyclerView(), "left");
+            DataBase.getInstance().setCategory("dringkingBar");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.LEFT);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llAll) {
-            DataBase.category = "all";
-            Transaction(new FragmentRecyclerView(), "");
+            DataBase.getInstance().setCategory("all");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.NODIR);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llFoodStore) {
-            DataBase.category = "foodStore";
-            DataBase.animationDirection = "leftIn";
-            Transaction(new FragmentRecyclerView(), "right");
+            DataBase.getInstance().setCategory("foodStore");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.RIGHT);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
         else if(view.getId() == R.id.llBilliards) {
-            DataBase.category = "billiards";
-            DataBase.animationDirection = "upIn";
-            Transaction(new FragmentRecyclerView(), "bottom");
+            DataBase.getInstance().setCategory("billiards");
+            DataBase.getInstance().setSwitchParm(true);
+            DataBase.getInstance().setDirection(DataBase.DOWN);
+            Log.d("방향", ""+DataBase.getInstance().getDirection());
+
+            Transaction(DataBase.getDirection());
         }
     }
 
-    private void Transaction(Fragment fragment, String strParm){
+    private void Transaction(int direction){
         FragmentTransaction fragmentTransaction = FragmentMain.fragmentManager.beginTransaction();
-
-        if(strParm.equals("top")){
-            fragmentTransaction.setCustomAnimations(R.anim.trans_bottom_in, R.anim.trans_top_out);
-        }
-        else if(strParm.equals("bottom")){
-            fragmentTransaction.setCustomAnimations(R.anim.trans_bottom_in, R.anim.trans_top_out);
-        }
-        else if(strParm.equals("left")){
-            fragmentTransaction.setCustomAnimations(R.anim.trans_left_in, R.anim.trans_top_out);
-        }
-        else if(strParm.equals("right")){
-            fragmentTransaction.setCustomAnimations(R.anim.trans_right_in, R.anim.trans_top_out);
-        }
-        else{
-            //
-        }
-
-        fragmentTransaction.replace(R.id.flMainContainer, fragment).addToBackStack(null).commit();
-    }
-
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        if(DataBase.animationDirection.equals("leftIn")){
-            return CubeAnimation.create(CubeAnimation.LEFT, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("leftOut")){
-            return CubeAnimation.create(CubeAnimation.RIGHT, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("rightIn")){
-            return CubeAnimation.create(CubeAnimation.RIGHT, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("rightOut")){
-            return CubeAnimation.create(CubeAnimation.LEFT, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("upIn")){
-            return CubeAnimation.create(CubeAnimation.UP, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("upOut")){
-            return CubeAnimation.create(CubeAnimation.DOWN, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("downIn")){
-            return CubeAnimation.create(CubeAnimation.DOWN, enter, 550);
-        }
-        else if(DataBase.animationDirection.equals("downOut")){
-            return CubeAnimation.create(CubeAnimation.UP, enter, 550);
-        }
-        else {
-            return CubeAnimation.create(CubeAnimation.UP, enter, 550);
+        switch(DataBase.getInstance().getDirection()){
+            case DataBase.UP:
+                fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.UP)).commit();
+                break;
+            case DataBase.DOWN:
+                fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.DOWN)).commit();
+                break;
+            case DataBase.LEFT:
+                fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.LEFT)).commit();
+                break;
+            case DataBase.RIGHT:
+                fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.RIGHT)).commit();
+                break;
+            case DataBase.NODIR :
+                fragmentTransaction.replace(R.id.flMainContainer, new TabFragment().newInstance(DataBase.NODIR)).commit();
+                break;
         }
     }
+
 }
