@@ -1,0 +1,100 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_height"
+        android:orientation="vertical"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="3.2"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/ivCoverImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|bottom"
+                    android:background="@android:drawable/screen_background_dark_transparent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCoverText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textColor="#FFFFFF"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.8"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="left|center">
+                <Button
+                    android:id="@+id/btOpenAndClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:minWidth="60dp"
+                    android:minHeight="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="영업중"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right|center">
+
+                <com.sackcentury.shinebuttonlib.ShineButton
+                    android:id="@+id/btLike"
+                    android:layout_width="30dip"
+                    android:layout_height="30dip"
+                    android:layout_centerInParent="true"
+                    android:focusable="false"
+                    app:btn_color="@android:color/darker_gray"
+                    app:btn_fill_color="#FFE400"
+                    android:layout_marginRight="5dp"
+                    app:enable_flashing="true"
+                    app:siShape="@raw/star" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
