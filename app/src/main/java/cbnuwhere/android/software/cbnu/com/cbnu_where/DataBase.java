@@ -44,7 +44,7 @@ public class DataBase {
     public static String billiards = "billiards";
     public static String motel = "motel";
     public static String hairshop = "hairshop";
-
+    //2017-01-19 Test
     public static Integer[] images= {
             R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout,
             R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout, R.drawable.inandout,
